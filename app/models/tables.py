@@ -35,22 +35,22 @@ class Aluno(db.Model):
         return '<Aluno %s>' % self.nome
 
 
-class ProfessoreDisciplina(db.Model):
+class ProfessorDisciplina(db.Model):
     __tablename__ = 'professores_disciplinas'
     
     id = db.Column(db.Integer, primary_key=True)
     professor_id = db.Column(db.Integer, db.ForeignKey('professores.id'), nullable=False)
-    disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplina.id'), nullable=False)
+    disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplinas.id'), nullable=False)
 
     def __repr__(self):
-        return '<Professore Disciplina %s>' % self.professor_id
+        return '<Professor Disciplina %s>' % self.professor_id
 
 
 class Etapa(db.Model):
     __tablename__ = 'etapas'
 
     id = db.Column(db.Integer, primary_key=True)
-    disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplina.id'), nullable=False)
+    disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplinas.id'), nullable=False)
     descricao = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):

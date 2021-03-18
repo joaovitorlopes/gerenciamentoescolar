@@ -12,10 +12,4 @@ migrate = Migrate(app, db, compare_type=True)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-# from app.models.tables import Professor
-
-# from app.controllers import alunos
-# from app.controllers import disciplinas
-# from app.controllers import etapas
-# from app.controllers import notas
-# from app.controllers import professores
+from app.models.tables import Aluno, Disciplina, Etapa, Nota, Professor, ProfessorDisciplina

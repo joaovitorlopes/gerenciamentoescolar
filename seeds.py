@@ -1,5 +1,5 @@
 from app import db
-from app.models.tables import Usuario, Instituicao, Curso
+from app.models.tables import Aluno, Disciplina, Etapa, Nota, Professor, ProfessorDisciplina
 import bcrypt
 
 # Criando usuários
