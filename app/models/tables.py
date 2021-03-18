@@ -1,6 +1,6 @@
 from app import db
 
-class Professores(db.Model):
+class Professor(db.Model):
     __tablename__ = 'professores'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -9,10 +9,10 @@ class Professores(db.Model):
     senha = db.Column(db.String(200))
 
     def __repr__(self):
-        return '<Professores %s>' % self.nome
+        return '<Professor %s>' % self.nome
 
 
-class Disciplinas(db.Model):
+class Disciplina(db.Model):
     __tablename__ = 'disciplinas'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -20,10 +20,10 @@ class Disciplinas(db.Model):
     calculo = db.Column(db.String(20))
 
     def __repr__(self):
-        return '<Disciplinas %s>' % self.nome
+        return '<Disciplina %s>' % self.nome
 
 
-class Alunos(db.Model):
+class Aluno(db.Model):
     __tablename__ = 'alunos'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -32,10 +32,10 @@ class Alunos(db.Model):
     senha = db.Column(db.String(200))
 
     def __repr__(self):
-        return '<Alunos %s>' % self.nome
+        return '<Aluno %s>' % self.nome
 
 
-class ProfessoresDisciplinas(db.Model):
+class ProfessoreDisciplina(db.Model):
     __tablename__ = 'professores_disciplinas'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -43,10 +43,10 @@ class ProfessoresDisciplinas(db.Model):
     disciplina_id = db.Column(db.Integer, db.ForeignKey('disciplina.id'), nullable=False)
 
     def __repr__(self):
-        return '<Professores Disciplinas %s>' % self.professor_id
+        return '<Professore Disciplina %s>' % self.professor_id
 
 
-class Etapas(db.Model):
+class Etapa(db.Model):
     __tablename__ = 'etapas'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -54,10 +54,10 @@ class Etapas(db.Model):
     descricao = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        return '<Etapas %s>' % self.descricao
+        return '<Etapa %s>' % self.descricao
 
 
-class Notas(db.Model):
+class Nota(db.Model):
     __tablename__ = 'notas'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -66,4 +66,4 @@ class Notas(db.Model):
     nota = db.Column(db.Float, nullable=False)
     
     def __repr__(self):
-        return '<Notas %s>' % self.nota
+        return '<Nota %s>' % self.nota
