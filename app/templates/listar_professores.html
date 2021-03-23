@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block conteudo %}
 <h2>Listando professores</h2>
+{% if msg == 'deletar' %}
+<div class="alert alert-sucess">Professor deletado com sucesso!</div>
+{% endif %}
+
 {% if professor|count > 0 %}
 <table class="table">
     <tr>
@@ -25,4 +29,5 @@
 {% else %}
 <div class="alert alert-danger">Nenhum professor encontrado para esta busca</div>
 {% endif %}
+<div class="alert alert-danger">Nenhum professor encontrado!</div>
 {% endblock %}
