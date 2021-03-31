@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2 class="bg_warning">Listagem de professores</h2>
+
+{% if msg == 'deletar' %}
+<div class="alert alert-success">Professor deletado com sucesso!</div>
+{% endif %}
+{% if msg == 'alterar' %}
+<div class="alert alert-success">Professor alterado com sucesso!</div>
+{% endif %}
+{% if msg == 'inserir' %}
+<div class="alert alert-success">Professor cadastrado com sucesso!</div>
+{% endif %}
+
+{% if lista %}
+
+<form class="row g-3" method="GET" action="/professores">
+    <div class="col-auto">
+        <label for="nome">Nome:</label>
+    </div>
+    <div class="col-auto">
+        <label for="nome" class="visually-hidden">Nome:</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex.: Maria">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>id</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for l in lista %}
+    <tr>
+        <td>{{ l.id }}</td>
+        <td>{{ l.nome }}</td>
+        <td>{{ l.email }}</td>
+        <td>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeletarProfessor" onclick="setProfessor({{ l.id }})">
+                Deletar
+            </button>
+        </td>
+        <td><a href='/professores/alterar/{{ l.id }}' class="btn btn-warning">Alterar</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<nav aria-label="...">
+    <ul class="pagination pagination-sm">
+        {% for p in range(total_paginas - 2) %}
+        {% if p == pagina_atual - 1 %}
+        <li class="page-item active" aria-current="page">
+        {% else %}
+        <li class="page-item">
+        {% endif %}
+            <a class="page-link" href="/professores/pagina/{{ p + 1 }}">{{ p + 1 }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% else %}
+<div class="alert alert-danger">Nenhum professor cadastrado!</div>
+{% endif %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalDeletarProfessor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Confirmação de exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Confirma a exclusão deste professor?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="deletarProfessor()">Deletar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      
+    let professorId = 0
+
+    function setProfessor(id){
+        professorId = id
+    }
+
+    function deletarProfessor(){
+        let url = "/professores/deletar/" + professorId
+        window.location.href = url
+    }
+
+  </script>
+
+{% endblock %}
